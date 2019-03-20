@@ -25,7 +25,6 @@ class Get10k():
         form10kLookup = soup.find_all('tr')
         form10kList = form10kLookup[1].find('a')
         form10k = str(form10kList).split("\"")[1]
-
         return form10k
 
     def saveHtml(self, form10k):
