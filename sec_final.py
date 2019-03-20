@@ -10,11 +10,8 @@ class Get10k():
     def getFilingsPage(self, stock_name):
         soup = self.parsePage(self.homepage.format(stock_name))
         base = soup.find(text='10-K')
-        #print(base)
         form = str(base.find_next()).split("\"")[3]
-        #print(form)
         return form
-        #self.getFormsPage(form)
 
     def parsePage(self, url):
         page = requests.get(url)
@@ -24,17 +21,11 @@ class Get10k():
     def getFormsPage(self, form):
         soup = self.parsePage(self.basepage.format(form))
         filingDateLookup = soup.find(text='Filing Date')
-        #print(filingDateLookup)
-        #print(type(filingDateLookup))
         filingDate = filingDateLookup.find_next().text
-        #print(filingDate)
         form10kLookup = soup.find_all('tr')
-        print(form10kLookup[1])
         form10kList = form10kLookup[1].find('a')
-        #print(form10kList)
         form10k = str(form10kList).split("\"")[1]
-        #print(form10k)
-        #self.saveHtml(form10k)
+
         return form10k
 
     def saveHtml(self, form10k):
@@ -45,12 +36,7 @@ class Get10k():
         file_ = open(abs_file_path, 'w')
         file_.write(soup)
         file_.close()
-        #print(soup)
-        #filename = "{}.html".format(filingDate)
-        #file_ = open(filename, 'w')
-        #file_.write(soup)
-        #file_.close()
-        #return soup
+
 
     def main(self, company):
         self.saveHtml(self.getFormsPage(self.getFilingsPage(company)))
@@ -61,5 +47,3 @@ class Get10k():
 
 
 
-#x = Get10k()
-#x.getFilingsPage("nke")
