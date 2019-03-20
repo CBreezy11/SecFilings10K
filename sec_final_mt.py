@@ -2,6 +2,8 @@ import requests
 from bs4 import BeautifulSoup
 import os
 
+#ok
+
 class Get10k():
     def __init__(self):
         self.basepage = "https://www.sec.gov{}"
